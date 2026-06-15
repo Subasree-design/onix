@@ -5,149 +5,141 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ONIX AI | AI-Powered Teleradiology Platform for Radiology Teams</title>
     <meta name="description" content="ONIX AI is a browser-based teleradiology platform that brings DICOM viewing, AI-assisted reporting, voice transcription, case collaboration, and smart radiologist workflows into one workspace.">
-
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=Outfit:wght@300;500;600;700;800&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
             theme: {
                 extend: {
-                    colors: {
-                        neon: '#2c8ef4',
-                        violet: '#8b6cf6',
-                        muted: '#8a93a6',
-                        primary: '#5fb4ff',
-                    },
-                    fontFamily: {
-                        header: ['Outfit', 'sans-serif'],
-                        sans: ['Inter', 'sans-serif'],
-                    }
+                    colors: { neon: '#2c8ef4', violet: '#8b6cf6', muted: '#8a93a6', primary: '#5fb4ff' },
+                    fontFamily: { header: ['Outfit', 'sans-serif'], sans: ['Inter', 'sans-serif'] }
                 }
             }
         }
     </script>
-
     <style>
-        /* Animation for Scroll Pop-In Effect */
         .reveal { opacity: 0; transform: translateY(40px); transition: all 1.2s cubic-bezier(0.16, 1, 0.3, 1); }
         .reveal.active { opacity: 1; transform: translateY(0); }
-
         .hero-bg {
-            background: linear-gradient(rgba(5, 10, 20, 0.92), rgba(5, 10, 20, 0.92)), url('images/hero-bg.jpg');
-            background-size: cover;
-            background-position: center;
-            background-attachment: fixed;
+            background: linear-gradient(rgba(5, 10, 20, 0.75), rgba(5, 10, 20, 0.75)), url('images/hero-bg.jpg');
+            background-size: cover; background-position: center; background-attachment: fixed;
             min-height: 100vh;
         }
-        .glass-header {
-            background: rgba(5, 10, 20, 0.85);
-            backdrop-filter: blur(16px);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        @supports (-webkit-touch-callout: none) {
+            .hero-bg { background-attachment: scroll; }
         }
-        /* Innovative Outline Button Styles */
-        .nav-btn {
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            padding: 8px 24px;
-            border-radius: 9999px;
-            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-        }
-        .nav-btn:hover {
-            border: 1px solid rgba(44, 142, 244, 0.5);
-            background: rgba(44, 142, 244, 0.1);
-            color: #2c8ef4;
-        }
-
-        /* Pop-in animation for hero headline & subtext */
+        .glass-header { background: rgba(5, 10, 20, 0.85); backdrop-filter: blur(16px); }
+        .nav-link { padding: 4px 2px; transition: color 0.3s ease; color: rgba(255,255,255,0.6); font-size: 12px; }
+        .nav-link:hover { color: #2c8ef4; }
         @keyframes popIn {
             0% { opacity: 0; transform: scale(0.85) translateY(20px); }
             60% { opacity: 1; transform: scale(1.03) translateY(0); }
             100% { opacity: 1; transform: scale(1) translateY(0); }
         }
-        .pop-in {
-            opacity: 0;
-            animation: popIn 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-        }
+        .pop-in { opacity: 0; animation: popIn 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
         .pop-in.delay-1 { animation-delay: 0.2s; }
         .pop-in.delay-2 { animation-delay: 0.45s; }
-        .pop-in.delay-3 { animation-delay: 0.7s; }
+        .orb { position: absolute; border-radius: 50%; filter: blur(90px); opacity: 0.18; pointer-events: none; }
+        .feature-card { transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1); }
+        .feature-card:hover { border-color: rgba(44, 142, 244, 0.35); background: rgba(44, 142, 244, 0.04); transform: translateY(-4px); }
 
-        /* Soft gradient orbs for ambient depth */
-        .orb {
-            position: absolute;
-            border-radius: 50%;
-            filter: blur(90px);
-            opacity: 0.18;
-            pointer-events: none;
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-12px); }
+        }
+        .float-anim { animation: float 6s ease-in-out infinite; }
+
+        /* ===== Custom Media Queries ===== */
+
+        /* Large desktops */
+        @media (min-width: 1280px) {
+            .hero-bg { min-height: 100vh; }
         }
 
-        .feature-card {
-            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        /* Tablets (landscape & portrait) */
+        @media (max-width: 1024px) {
+            .hero-bg h1 { font-size: 3rem; }
+            .orb { filter: blur(70px); }
         }
-        .feature-card:hover {
-            border-color: rgba(44, 142, 244, 0.35);
-            background: rgba(44, 142, 244, 0.04);
-            transform: translateY(-4px);
+
+        /* Small tablets / large phones */
+        @media (max-width: 768px) {
+            .hero-bg { min-height: 90vh; }
+            .hero-bg h1 { font-size: 2.5rem; line-height: 1.2; }
+            .hero-bg p { font-size: 0.9rem; }
+            .glass-header .max-w-7xl { padding-left: 1rem; padding-right: 1rem; }
+        }
+
+        /* Mobile phones */
+        @media (max-width: 480px) {
+            .hero-bg { min-height: 85vh; padding-top: 5rem; padding-bottom: 3rem; }
+            .hero-bg h1 { font-size: 2rem; }
+            .hero-bg p { font-size: 0.85rem; line-height: 1.6; }
+            .orb { filter: blur(50px); opacity: 0.12; }
+            .feature-card { padding: 1.5rem; }
+        }
+
+        /* Very small devices */
+        @media (max-width: 360px) {
+            .hero-bg h1 { font-size: 1.75rem; }
         }
     </style>
 </head>
 <body class="bg-[#050a14] text-white font-sans">
 
     <header class="fixed top-0 w-full z-50 glass-header">
-        <div class="max-w-7xl mx-auto flex justify-between items-center px-8 py-6">
-            <div class="flex items-center gap-3">
-                <img src="images/logo.png" class="h-10 w-auto" alt="ONIX Logo">
-                <span class="hidden sm:inline text-[10px] uppercase tracking-[0.2em] text-muted font-header border-l border-white/10 pl-3">A GenPhase.ai Product</span>
+        <div class="w-full flex justify-between items-center px-4 sm:px-8 py-3">
+            <a href="#home" class="flex items-center gap-2">
+                <img src="images/logo.png" class="h-7 w-auto" alt="ONIX Logo" onerror="this.style.display='none'; this.nextElementSibling.style.display='inline-block';">
+                <span style="display:none;" class="font-header font-bold text-lg tracking-widest text-white">ONIX<span class="text-neon">AI</span></span>
+            </a>
+            <div class="flex items-center gap-8">
+                <nav class="hidden md:flex gap-8 font-header font-bold uppercase tracking-widest">
+                    <a href="#home" class="nav-link">Home</a>
+                    <a href="#platform" class="nav-link">Platform</a>
+                    <a href="#solutions" class="nav-link">Solutions</a>
+                    <a href="#roi" class="nav-link">ROI</a>
+                </nav>
+                <a class="px-5 py-2 border border-white/10 rounded-full text-[12px] font-header font-bold uppercase tracking-widest hover:border-neon transition cursor-pointer">Sign In</a>
             </div>
-
-            <nav class="hidden md:flex gap-4 font-header text-[14px] font-bold uppercase tracking-widest text-white/90">
-                <a href="#home" class="nav-btn">Home</a>
-                <a href="#platform" class="nav-btn">Platform</a>
-                <a href="#solutions" class="nav-btn">Solutions</a>
-                <a href="#roi" class="nav-btn">ROI</a>
-            </nav>
-
-            <a class="px-8 py-3 border border-white/10 rounded-full text-[14px] font-header font-bold uppercase tracking-widest hover:border-neon transition cursor-pointer">Sign In</a>
         </div>
     </header>
 
-    <!-- ============== HERO ============== -->
-    <section id="home" class="hero-bg relative flex items-center justify-center pt-28 pb-24 overflow-hidden">
-        <div class="orb w-[500px] h-[500px] bg-neon -top-32 -left-32"></div>
-        <div class="orb w-[420px] h-[420px] bg-violet top-1/3 right-0"></div>
+    <section id="home" class="hero-bg relative flex items-center justify-center px-4 sm:px-6 overflow-hidden">
+        <div class="orb w-[320px] h-[320px] sm:w-[500px] sm:h-[500px] bg-neon -top-32 -left-32 float-anim"></div>
+        <div class="orb w-[260px] h-[260px] sm:w-[420px] sm:h-[420px] bg-violet top-1/3 right-0 float-anim" style="animation-delay: -3s;"></div>
 
-        <div class="relative max-w-5xl px-6 text-center reveal" id="hero-content">
-            <div class="inline-flex items-center gap-2 px-4 py-1 rounded-full border border-neon/10 bg-neon/5 text-neon text-[9px] font-header font-bold uppercase tracking-[0.2em] mb-6">
-                ONIX AI — Next-Gen AI Radiology, by GenPhase.ai
-            </div>
+        <div class="relative w-full max-w-3xl mx-auto text-center reveal py-32">
 
-            <h1 class="text-2xl md:text-4xl font-header font-light leading-[1.2] tracking-tight text-white/95 mb-6 pop-in delay-1">
-                Modern Teleradiology, Powered by AI
+            <h1 class="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-header font-light leading-tight text-white mb-8 pop-in">
+                Modern Teleradiology,<br>
+                <span class="bg-gradient-to-r from-white via-sky-200 to-neon bg-clip-text text-transparent font-semibold">Powered by AI</span>
             </h1>
 
-            <p class="text-sm md:text-base text-muted max-w-2xl mx-auto font-light leading-relaxed mb-10 pop-in delay-2">
-                ONIX AI brings diagnostic viewing, AI assistance, voice reporting, case collaboration, and radiology operations into one browser-based workspace — built for hospitals, imaging centers, teleradiology groups, and distributed radiology teams.
+            <p class="text-sm sm:text-base md:text-lg text-muted max-w-2xl mx-auto leading-relaxed mb-12 pop-in delay-1">
+                ONIX AI brings diagnostic viewing, AI assistance, voice reporting,
+                case collaboration, and radiology operations into one browser-based
+                workspace — built for hospitals, imaging centers, teleradiology groups,
+                and distributed radiology teams.
             </p>
 
-            <div class="flex gap-4 justify-center mb-10">
-                <a class="px-8 py-3 bg-neon/10 text-neon border border-neon/20 rounded-full font-header text-[11px] uppercase tracking-[0.1em] hover:bg-neon/20 transition cursor-pointer">Book a Demo</a>
+            <div class="flex flex-col sm:flex-row justify-center items-center gap-4 pop-in delay-2">
+                <a href="#roi"
+                   class="w-full sm:w-auto text-center px-8 py-4 bg-gradient-to-r from-neon to-violet text-white rounded-full font-semibold shadow-lg shadow-neon/20 hover:scale-105 hover:shadow-neon/40 transition-all duration-300">
+                    Book a Demo
+                </a>
 
-                <a class="px-8 py-3 border border-white/20 rounded-full font-header text-[11px] uppercase tracking-[0.1em] hover:border-white/50 transition cursor-pointer flex items-center gap-2">
-                    <svg class="w-3 h-3 fill-white" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
-                    Watch Platform Walkthrough
+                <a href="#platform"
+                   class="w-full sm:w-auto text-center px-8 py-4 border border-white/15 rounded-full font-semibold hover:border-neon hover:text-neon hover:bg-white/5 transition-all duration-300">
+                    Watch Platform Demo
                 </a>
             </div>
 
-            <!-- Feature pill strip -->
-            <div class="flex flex-wrap justify-center gap-2 mb-20 pop-in delay-3">
-                <span class="px-4 py-2 rounded-full bg-white/5 border border-white/5 text-[10px] uppercase tracking-widest text-muted font-header">DICOM / NIfTI Viewer</span>
-                <span class="px-4 py-2 rounded-full bg-white/5 border border-white/5 text-[10px] uppercase tracking-widest text-muted font-header">Ask ONIX AI</span>
-                <span class="px-4 py-2 rounded-full bg-white/5 border border-white/5 text-[10px] uppercase tracking-widest text-muted font-header">Voice to Structured Report</span>
-                <span class="px-4 py-2 rounded-full bg-white/5 border border-white/5 text-[10px] uppercase tracking-widest text-muted font-header">Case Collaboration</span>
-                <span class="px-4 py-2 rounded-full bg-white/5 border border-white/5 text-[10px] uppercase tracking-widest text-muted font-header">Smart Routing</span>
-                <span class="px-4 py-2 rounded-full bg-white/5 border border-white/5 text-[10px] uppercase tracking-widest text-muted font-header">Admin Dashboard</span>
-            </div>
+        </div>
+    </section>
 
-            <!-- Metrics -->
+    <section class="py-20 px-4 sm:px-6 reveal">
+        <div class="max-w-7xl mx-auto">
             <div class="grid md:grid-cols-3 gap-6 mb-4">
                 <div class="p-8 bg-white/5 border border-white/5 rounded-2xl text-left">
                     <div class="text-4xl font-header font-bold text-neon mb-2">30-40%</div>
@@ -167,22 +159,21 @@
             </div>
             <p class="text-[10px] text-muted/70 uppercase tracking-widest mb-20">*Indicative pilot benchmarks; full validation ongoing.</p>
 
-            <!-- Testimonials -->
             <div class="text-left">
                 <h3 class="text-center text-xs uppercase tracking-[0.3em] text-muted mb-10 font-bold">Trusted by Radiologists. Built for Imaging Partners.</h3>
                 <div class="grid md:grid-cols-3 gap-6">
                     <div class="p-6 bg-white/5 border border-white/5 rounded-2xl">
-                        <p class="text-sm text-muted mb-4 italic">“ONIX reduces the constant switching between viewer, dictation, reporting, and communication tools.”</p>
+                        <p class="text-sm text-muted mb-4 italic">"ONIX reduces the constant switching between viewer, dictation, reporting, and communication tools."</p>
                         <h4 class="text-xs font-bold font-header">Dr. Rajesh Kumar</h4>
                         <p class="text-[10px] text-primary">Consultant Radiologist</p>
                     </div>
                     <div class="p-6 bg-white/5 border border-white/5 rounded-2xl">
-                        <p class="text-sm text-muted mb-4 italic">“The platform gives our lab better visibility into case status, assignments, and report delivery.”</p>
+                        <p class="text-sm text-muted mb-4 italic">"The platform gives our lab better visibility into case status, assignments, and report delivery."</p>
                         <h4 class="text-xs font-bold font-header">Sarah Jenkins</h4>
                         <p class="text-[10px] text-primary">Director, Apex Diagnostic Center</p>
                     </div>
                     <div class="p-6 bg-white/5 border border-white/5 rounded-2xl">
-                        <p class="text-sm text-muted mb-4 italic">“The AI assistant helps with report drafting, while the radiologist remains in complete control.”</p>
+                        <p class="text-sm text-muted mb-4 italic">"The AI assistant helps with report drafting, while the radiologist remains in complete control."</p>
                         <h4 class="text-xs font-bold font-header">Dr. Amit Sharma</h4>
                         <p class="text-[10px] text-primary">Senior Radiologist</p>
                     </div>
@@ -193,7 +184,6 @@
 
     <main class="max-w-7xl mx-auto px-8">
 
-        <!-- ============== PROBLEM ============== -->
         <section class="py-28 reveal">
             <div class="text-center mb-16">
                 <div class="inline-block text-[10px] uppercase tracking-[0.3em] text-neon font-header font-bold mb-3">The Problem</div>
@@ -220,7 +210,6 @@
             </div>
         </section>
 
-        <!-- ============== PLATFORM ============== -->
         <section id="platform" class="py-28 reveal">
             <div class="text-center mb-16">
                 <div class="inline-block text-[10px] uppercase tracking-[0.3em] text-neon font-header font-bold mb-3">The Platform</div>
@@ -240,7 +229,7 @@
                         <svg class="w-5 h-5 text-violet" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linejoin="round" d="M12 3l1.5 4.5L18 9l-4.5 1.5L12 15l-1.5-4.5L6 9l4.5-1.5L12 3z"/><path stroke-linecap="round" d="M19 14l.7 2.1L22 17l-2.3.9L19 20l-.7-2.1L16 17l2.3-.9L19 14z"/></svg>
                     </div>
                     <h3 class="font-header font-semibold text-base mb-2">Ask ONIX AI</h3>
-                    <p class="text-xs text-muted leading-relaxed">An in-viewer copilot for image context, findings support, study-specific Q&amp;A, and report drafting.</p>
+                    <p class="text-xs text-muted leading-relaxed">An in-viewer copilot for image context, findings support, study-specific Q&A, and report drafting.</p>
                 </div>
                 <div class="feature-card p-8 border border-white/5 rounded-3xl">
                     <div class="w-10 h-10 rounded-xl bg-neon/10 flex items-center justify-center mb-5">
@@ -273,7 +262,6 @@
             </div>
         </section>
 
-        <!-- ============== AI COPILOT SPOTLIGHT ============== -->
         <section class="py-28 reveal">
             <div class="grid md:grid-cols-2 gap-12 items-center">
                 <div>
@@ -281,10 +269,10 @@
                     <h2 class="text-3xl md:text-4xl font-header font-bold mb-5">Ask ONIX AI, Right Inside the Viewer</h2>
                     <p class="text-sm text-muted font-light leading-relaxed mb-6">ONIX AI sits alongside every study, ready to help with image context, prior comparisons, findings support, and study-specific questions — drafting report language the radiologist can review, edit, and finalize.</p>
                     <ul class="space-y-3 text-sm text-white/80">
-                        <li class="flex items-start gap-3"><span class="text-neon mt-1">＋</span> Contextual support for the study currently open</li>
-                        <li class="flex items-start gap-3"><span class="text-neon mt-1">＋</span> Findings drafted for radiologist review</li>
-                        <li class="flex items-start gap-3"><span class="text-neon mt-1">＋</span> Study-specific Q&amp;A without leaving the case</li>
-                        <li class="flex items-start gap-3"><span class="text-neon mt-1">＋</span> Faster path from read to signed report</li>
+                        <li class="flex items-start gap-3"><span class="text-neon mt-1">+</span> Contextual support for the study currently open</li>
+                        <li class="flex items-start gap-3"><span class="text-neon mt-1">+</span> Findings drafted for radiologist review</li>
+                        <li class="flex items-start gap-3"><span class="text-neon mt-1">+</span> Study-specific Q&A without leaving the case</li>
+                        <li class="flex items-start gap-3"><span class="text-neon mt-1">+</span> Faster path from read to signed report</li>
                     </ul>
                 </div>
                 <div class="p-10 bg-white/5 border border-white/5 rounded-3xl">
@@ -303,7 +291,6 @@
             </div>
         </section>
 
-        <!-- ============== WORKFLOW ============== -->
         <section class="py-28 reveal">
             <div class="text-center mb-16">
                 <div class="inline-block text-[10px] uppercase tracking-[0.3em] text-neon font-header font-bold mb-3">The Workflow</div>
@@ -333,7 +320,6 @@
             </div>
         </section>
 
-        <!-- ============== SOLUTIONS BY AUDIENCE ============== -->
         <section id="solutions" class="py-28 reveal">
             <div class="text-center mb-16">
                 <div class="inline-block text-[10px] uppercase tracking-[0.3em] text-neon font-header font-bold mb-3">Solutions</div>
@@ -359,7 +345,6 @@
             </div>
         </section>
 
-        <!-- ============== CLINICAL TRUST BANNER ============== -->
         <section class="py-16 reveal">
             <div class="text-center p-12 border border-neon/10 bg-neon/5 rounded-3xl">
                 <h3 class="text-2xl md:text-3xl font-header font-light mb-3">AI assists. Radiologists decide.</h3>
@@ -367,33 +352,79 @@
             </div>
         </section>
 
-        <!-- ============== FINAL CTA / ROI ============== -->
         <section id="roi" class="py-28 text-center reveal">
             <div class="inline-block text-[10px] uppercase tracking-[0.3em] text-violet font-header font-bold mb-3">Get Started</div>
             <h2 class="text-3xl md:text-5xl font-header font-bold mb-5">Modernize Your Reading Room</h2>
-            <p class="text-sm text-muted max-w-xl mx-auto font-light leading-relaxed mb-10">Book a discovery call or request an ONIX AI demo — and see what a unified radiology workspace can do for your team's turnaround and throughput.</p>
-            <div class="flex gap-4 justify-center flex-wrap">
-                <a class="px-8 py-3 bg-neon/10 text-neon border border-neon/20 rounded-full font-header text-[11px] uppercase tracking-[0.1em] hover:bg-neon/20 transition cursor-pointer">Request ONIX Demo</a>
-                <a class="px-8 py-3 border border-white/20 rounded-full font-header text-[11px] uppercase tracking-[0.1em] hover:border-white/50 transition cursor-pointer">Calculate Workflow ROI</a>
-            </div>
+            <p class="text-sm text-muted max-w-xl mx-auto font-light leading-relaxed">Book a discovery call or request an ONIX AI demo — and see what a unified radiology workspace can do for your team's turnaround and throughput.</p>
         </section>
     </main>
 
-    <footer class="py-16 border-t border-white/5 text-center text-muted text-[11px] uppercase tracking-widest">
-        <p class="mb-2">ONIX AI is a product of GenPhase.ai</p>
-        <p>&copy; 2026 GenPhase.ai. All rights reserved.</p>
-    </footer>
+    <footer class="border-t border-white/5 py-16 mt-20">
+    <div class="max-w-7xl mx-auto px-8">
+        <div class="grid md:grid-cols-4 gap-12">
+
+            <div>
+                <img src="images/logo.png" alt="ONIX Logo" class="h-8 mb-6">
+                <p class="text-sm text-muted mb-4">
+                    AI-powered teleradiology platform built for hospitals, imaging centers, and radiology teams.
+                </p>
+                <p class="text-xs text-muted">Walnut Creek, CA 94596</p>
+                <p class="text-xs text-muted mt-2">(844) 922-7468</p>
+                <p class="text-xs text-muted">hello@genphase.ai</p>
+            </div>
+
+            <div>
+                <h4 class="font-header font-semibold mb-4">Company</h4>
+                <ul class="space-y-2 text-sm text-muted">
+                    <li><a href="#home" class="hover:text-neon">Home</a></li>
+                    <li><a href="#platform" class="hover:text-neon">Platform</a></li>
+                    <li><a href="#solutions" class="hover:text-neon">Solutions</a></li>
+                    <li><a href="#roi" class="hover:text-neon">Contact</a></li>
+                </ul>
+            </div>
+
+            <div>
+                <h4 class="font-header font-semibold mb-4">Solutions</h4>
+                <ul class="space-y-2 text-sm text-muted">
+                    <li><a href="#" class="hover:text-neon">For Hospitals</a></li>
+                    <li><a href="#" class="hover:text-neon">For Imaging Centers</a></li>
+                    <li><a href="#" class="hover:text-neon">For Radiologists</a></li>
+                    <li><a href="#" class="hover:text-neon">For Teleradiology Groups</a></li>
+                </ul>
+            </div>
+
+            <div>
+                <h4 class="font-header font-semibold mb-4">Stay Updated</h4>
+                <p class="text-sm text-muted mb-4">
+                    Get updates on ONIX AI and radiology innovation.
+                </p>
+
+                <div class="flex">
+                    <input
+                        type="email"
+                        placeholder="Email address"
+                        class="flex-1 bg-white/5 border border-white/10 rounded-l-full px-4 py-3 text-sm outline-none">
+                    <button
+                        class="px-5 bg-neon text-white rounded-r-full text-sm font-semibold">
+                        Subscribe
+                    </button>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="border-t border-white/5 mt-12 pt-6 text-center">
+            <p class="text-xs text-muted">
+                © 2026 ONIX AI. All Rights Reserved.
+            </p>
+        </div>
+    </div>
+</footer>
 
     <script>
-        // Intersection Observer for scroll pop animation
         const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('active');
-                }
-            });
+            entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('active'); });
         }, { threshold: 0.1 });
-
         document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
     </script>
 </body>
