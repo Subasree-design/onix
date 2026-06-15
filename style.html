@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ONIX AI Components</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        brandDark: '#030712',      /* Deep Navy Background */
+                        brandGlass: 'rgba(15, 23, 42, 0.6)', /* Glassmorphism Base */
+                        brandCyan: '#06b6d4',      /* Cyan Accent */
+                        brandPurple: '#a855f7',    /* Purple Accent */
+                        brandBlue: '#3b82f6',      /* Blue Accent */
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Smooth glassmorphism style override */
+        .glass-card {
+            background: rgba(15, 23, 42, 0.45);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+    </style>
+</head>
+<body class="bg-brandDark text-slate-100 font-sans min-h-screen relative overflow-x-hidden">
+    <div class="absolute top-[-10%] left-[-10%] w-[500px] h-[500px] bg-brandPurple/10 rounded-full blur-[120px] pointer-events-none"></div>
+    <div class="absolute top-[20%] right-[-10%] w-[600px] h-[600px] bg-brandCyan/10 rounded-full blur-[150px] pointer-events-none"></div>
+
+    </body>
+</html>

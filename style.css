@@ -1,0 +1,77 @@
+/* 1. GLOBAL RESET (IMPORTANT) */
+html, body {
+    margin: 0;
+    padding: 0;
+    min-height: 100%;
+    background: #050a14;
+    overflow-x: hidden;
+}
+
+/* 2. BACKGROUND IMAGE LAYER */
+body {
+    background-image: url('./bg.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+
+/* 3. DARK OVERLAY (FIXED LAYERING) */
+body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background: rgba(3, 8, 18, 0.92);
+    z-index: 0;
+    pointer-events: none;
+}
+
+/* Ensure content stays above overlay */
+body > * {
+    position: relative;
+    z-index: 1;
+}
+
+/* 4. SCROLLBAR (KEEP YOUR STYLE) */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: #030712;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #265C8B;
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #3E7EB3;
+}
+
+/* 5. GLASS CARD (IMPROVED AVENTRO STYLE) */
+.glass-card {
+    background: rgba(255, 255, 255, 0.06);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    transition: all 0.3s ease;
+}
+
+/* 6. HOVER GLOW */
+.glass-card:hover {
+    border-color: rgba(62, 126, 179, 0.6);
+    box-shadow: 0 0 30px rgba(62, 126, 179, 0.25);
+    transform: translateY(-2px);
+}
+
+/* 7. AMBIENT ORB */
+@keyframes pulseGlow {
+    0%, 100% { opacity: 0.2; transform: scale(1); }
+    50% { opacity: 0.4; transform: scale(1.05); }
+}
+
+.ambient-orb {
+    animation: pulseGlow 8s infinite ease-in-out;
+}

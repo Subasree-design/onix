@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ONIX AI | AI-Powered Teleradiology Platform for Radiology Teams</title>
+    <meta name="description" content="ONIX AI is a browser-based teleradiology platform that brings DICOM viewing, AI-assisted reporting, voice transcription, case collaboration, and smart radiologist workflows into one workspace.">
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=Outfit:wght@300;500;600;700;800&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        neon: '#2c8ef4',
+                        violet: '#8b6cf6',
+                        muted: '#8a93a6',
+                        primary: '#5fb4ff',
+                    },
+                    fontFamily: {
+                        header: ['Outfit', 'sans-serif'],
+                        sans: ['Inter', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Animation for Scroll Pop-In Effect */
+        .reveal { opacity: 0; transform: translateY(40px); transition: all 1.2s cubic-bezier(0.16, 1, 0.3, 1); }
+        .reveal.active { opacity: 1; transform: translateY(0); }
+
+        .hero-bg {
+            background: linear-gradient(rgba(5, 10, 20, 0.92), rgba(5, 10, 20, 0.92)), url('images/hero-bg.jpg');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            min-height: 100vh;
+        }
+        .glass-header {
+            background: rgba(5, 10, 20, 0.85);
+            backdrop-filter: blur(16px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        /* Innovative Outline Button Styles */
+        .nav-btn {
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 8px 24px;
+            border-radius: 9999px;
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .nav-btn:hover {
+            border: 1px solid rgba(44, 142, 244, 0.5);
+            background: rgba(44, 142, 244, 0.1);
+            color: #2c8ef4;
+        }
+
+        /* Pop-in animation for hero headline & subtext */
+        @keyframes popIn {
+            0% { opacity: 0; transform: scale(0.85) translateY(20px); }
+            60% { opacity: 1; transform: scale(1.03) translateY(0); }
+            100% { opacity: 1; transform: scale(1) translateY(0); }
+        }
+        .pop-in {
+            opacity: 0;
+            animation: popIn 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+        .pop-in.delay-1 { animation-delay: 0.2s; }
+        .pop-in.delay-2 { animation-delay: 0.45s; }
+        .pop-in.delay-3 { animation-delay: 0.7s; }
+
+        /* Soft gradient orbs for ambient depth */
+        .orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(90px);
+            opacity: 0.18;
+            pointer-events: none;
+        }
+
+        .feature-card {
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .feature-card:hover {
+            border-color: rgba(44, 142, 244, 0.35);
+            background: rgba(44, 142, 244, 0.04);
+            transform: translateY(-4px);
+        }
+    </style>
+</head>
+<body class="bg-[#050a14] text-white font-sans">
+
+    <header class="fixed top-0 w-full z-50 glass-header">
+        <div class="max-w-7xl mx-auto flex justify-between items-center px-8 py-6">
+            <div class="flex items-center gap-3">
+                <img src="images/logo.png" class="h-10 w-auto" alt="ONIX Logo">
+                <span class="hidden sm:inline text-[10px] uppercase tracking-[0.2em] text-muted font-header border-l border-white/10 pl-3">A GenPhase.ai Product</span>
+            </div>
+
+            <nav class="hidden md:flex gap-4 font-header text-[14px] font-bold uppercase tracking-widest text-white/90">
+                <a href="#home" class="nav-btn">Home</a>
+                <a href="#platform" class="nav-btn">Platform</a>
+                <a href="#solutions" class="nav-btn">Solutions</a>
+                <a href="#roi" class="nav-btn">ROI</a>
+            </nav>
+
+            <a class="px-8 py-3 border border-white/10 rounded-full text-[14px] font-header font-bold uppercase tracking-widest hover:border-neon transition cursor-pointer">Sign In</a>
+        </div>
+    </header>
+
+    <!-- ============== HERO ============== -->
+    <section id="home" class="hero-bg relative flex items-center justify-center pt-28 pb-24 overflow-hidden">
+        <div class="orb w-[500px] h-[500px] bg-neon -top-32 -left-32"></div>
+        <div class="orb w-[420px] h-[420px] bg-violet top-1/3 right-0"></div>
+
+        <div class="relative max-w-5xl px-6 text-center reveal" id="hero-content">
+            <div class="inline-flex items-center gap-2 px-4 py-1 rounded-full border border-neon/10 bg-neon/5 text-neon text-[9px] font-header font-bold uppercase tracking-[0.2em] mb-6">
+                ONIX AI — Next-Gen AI Radiology, by GenPhase.ai
+            </div>
+
+            <h1 class="text-2xl md:text-4xl font-header font-light leading-[1.2] tracking-tight text-white/95 mb-6 pop-in delay-1">
+                Modern Teleradiology, Powered by AI
+            </h1>
+
+            <p class="text-sm md:text-base text-muted max-w-2xl mx-auto font-light leading-relaxed mb-10 pop-in delay-2">
+                ONIX AI brings diagnostic viewing, AI assistance, voice reporting, case collaboration, and radiology operations into one browser-based workspace — built for hospitals, imaging centers, teleradiology groups, and distributed radiology teams.
+            </p>
+
+            <div class="flex gap-4 justify-center mb-10">
+                <a class="px-8 py-3 bg-neon/10 text-neon border border-neon/20 rounded-full font-header text-[11px] uppercase tracking-[0.1em] hover:bg-neon/20 transition cursor-pointer">Book a Demo</a>
+
+                <a class="px-8 py-3 border border-white/20 rounded-full font-header text-[11px] uppercase tracking-[0.1em] hover:border-white/50 transition cursor-pointer flex items-center gap-2">
+                    <svg class="w-3 h-3 fill-white" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                    Watch Platform Walkthrough
+                </a>
+            </div>
+
+            <!-- Feature pill strip -->
+            <div class="flex flex-wrap justify-center gap-2 mb-20 pop-in delay-3">
+                <span class="px-4 py-2 rounded-full bg-white/5 border border-white/5 text-[10px] uppercase tracking-widest text-muted font-header">DICOM / NIfTI Viewer</span>
+                <span class="px-4 py-2 rounded-full bg-white/5 border border-white/5 text-[10px] uppercase tracking-widest text-muted font-header">Ask ONIX AI</span>
+                <span class="px-4 py-2 rounded-full bg-white/5 border border-white/5 text-[10px] uppercase tracking-widest text-muted font-header">Voice to Structured Report</span>
+                <span class="px-4 py-2 rounded-full bg-white/5 border border-white/5 text-[10px] uppercase tracking-widest text-muted font-header">Case Collaboration</span>
+                <span class="px-4 py-2 rounded-full bg-white/5 border border-white/5 text-[10px] uppercase tracking-widest text-muted font-header">Smart Routing</span>
+                <span class="px-4 py-2 rounded-full bg-white/5 border border-white/5 text-[10px] uppercase tracking-widest text-muted font-header">Admin Dashboard</span>
+            </div>
+
+            <!-- Metrics -->
+            <div class="grid md:grid-cols-3 gap-6 mb-4">
+                <div class="p-8 bg-white/5 border border-white/5 rounded-2xl text-left">
+                    <div class="text-4xl font-header font-bold text-neon mb-2">30-40%</div>
+                    <h4 class="text-sm font-header font-semibold mb-1">Faster Report Turnaround</h4>
+                    <p class="text-xs text-muted leading-relaxed">AI-drafted reports and voice transcription reduce dictation-to-delivery time.</p>
+                </div>
+                <div class="p-8 bg-white/5 border border-white/5 rounded-2xl text-left">
+                    <div class="text-4xl font-header font-bold text-neon mb-2">25-40%</div>
+                    <h4 class="text-sm font-header font-semibold mb-1">More Studies Per Radiologist</h4>
+                    <p class="text-xs text-muted leading-relaxed">Unified workflows help radiologists complete more reads with less operational friction.</p>
+                </div>
+                <div class="p-8 bg-white/5 border border-white/5 rounded-2xl text-left">
+                    <div class="text-4xl font-header font-bold text-neon mb-2">1 Day</div>
+                    <h4 class="text-sm font-header font-semibold mb-1">Radiologist Onboarding</h4>
+                    <p class="text-xs text-muted leading-relaxed">Browser-based access helps radiologists start reading with minimal setup.</p>
+                </div>
+            </div>
+            <p class="text-[10px] text-muted/70 uppercase tracking-widest mb-20">*Indicative pilot benchmarks; full validation ongoing.</p>
+
+            <!-- Testimonials -->
+            <div class="text-left">
+                <h3 class="text-center text-xs uppercase tracking-[0.3em] text-muted mb-10 font-bold">Trusted by Radiologists. Built for Imaging Partners.</h3>
+                <div class="grid md:grid-cols-3 gap-6">
+                    <div class="p-6 bg-white/5 border border-white/5 rounded-2xl">
+                        <p class="text-sm text-muted mb-4 italic">“ONIX reduces the constant switching between viewer, dictation, reporting, and communication tools.”</p>
+                        <h4 class="text-xs font-bold font-header">Dr. Rajesh Kumar</h4>
+                        <p class="text-[10px] text-primary">Consultant Radiologist</p>
+                    </div>
+                    <div class="p-6 bg-white/5 border border-white/5 rounded-2xl">
+                        <p class="text-sm text-muted mb-4 italic">“The platform gives our lab better visibility into case status, assignments, and report delivery.”</p>
+                        <h4 class="text-xs font-bold font-header">Sarah Jenkins</h4>
+                        <p class="text-[10px] text-primary">Director, Apex Diagnostic Center</p>
+                    </div>
+                    <div class="p-6 bg-white/5 border border-white/5 rounded-2xl">
+                        <p class="text-sm text-muted mb-4 italic">“The AI assistant helps with report drafting, while the radiologist remains in complete control.”</p>
+                        <h4 class="text-xs font-bold font-header">Dr. Amit Sharma</h4>
+                        <p class="text-[10px] text-primary">Senior Radiologist</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <main class="max-w-7xl mx-auto px-8">
+
+        <!-- ============== PROBLEM ============== -->
+        <section class="py-28 reveal">
+            <div class="text-center mb-16">
+                <div class="inline-block text-[10px] uppercase tracking-[0.3em] text-neon font-header font-bold mb-3">The Problem</div>
+                <h2 class="text-3xl md:text-4xl font-header font-bold">Radiology Workflows Are Fragmented</h2>
+                <p class="text-sm text-muted max-w-xl mx-auto mt-4 font-light leading-relaxed">Rising study volumes, disconnected tools, and distributed operations are straining reading rooms everywhere.</p>
+            </div>
+            <div class="grid md:grid-cols-4 gap-6">
+                <div class="p-6 border border-white/5 rounded-2xl bg-white/[0.02]">
+                    <h4 class="text-sm font-header font-semibold mb-2">Rising Study Volumes</h4>
+                    <p class="text-xs text-muted leading-relaxed">Growing imaging demand outpaces radiologist capacity across hospitals and imaging centers.</p>
+                </div>
+                <div class="p-6 border border-white/5 rounded-2xl bg-white/[0.02]">
+                    <h4 class="text-sm font-header font-semibold mb-2">Disconnected Tools</h4>
+                    <p class="text-xs text-muted leading-relaxed">Viewer, dictation, reporting, and messaging live in separate systems, forcing constant switching.</p>
+                </div>
+                <div class="p-6 border border-white/5 rounded-2xl bg-white/[0.02]">
+                    <h4 class="text-sm font-header font-semibold mb-2">No Shared Case Canvas</h4>
+                    <p class="text-xs text-muted leading-relaxed">Second opinions and case discussions happen over calls and chat apps, with no audit trail.</p>
+                </div>
+                <div class="p-6 border border-white/5 rounded-2xl bg-white/[0.02]">
+                    <h4 class="text-sm font-header font-semibold mb-2">Slow, Unstructured Reports</h4>
+                    <p class="text-xs text-muted leading-relaxed">Manual dictation and formatting delay turnaround and create inconsistency across reads.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============== PLATFORM ============== -->
+        <section id="platform" class="py-28 reveal">
+            <div class="text-center mb-16">
+                <div class="inline-block text-[10px] uppercase tracking-[0.3em] text-neon font-header font-bold mb-3">The Platform</div>
+                <h2 class="text-3xl md:text-4xl font-header font-bold">One Platform for Modern Radiology Operations</h2>
+                <p class="text-sm text-muted max-w-xl mx-auto mt-4 font-light leading-relaxed">Viewer, AI assistant, reporting, collaboration, case routing, and admin control — unified in a single workspace.</p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="feature-card p-8 border border-white/5 rounded-3xl">
+                    <div class="w-10 h-10 rounded-xl bg-neon/10 flex items-center justify-center mb-5">
+                        <svg class="w-5 h-5 text-neon" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><rect x="3" y="4" width="18" height="13" rx="2"/><path stroke-linecap="round" d="M8 21h8M12 17v4"/><path stroke-linecap="round" d="M3 9h18"/></svg>
+                    </div>
+                    <h3 class="font-header font-semibold text-base mb-2">Multiplanar DICOM / NIfTI Viewer</h3>
+                    <p class="text-xs text-muted leading-relaxed">Axial, sagittal, and coronal viewing with MPR, zoom, pan, measurement, annotation, capture, and diagnostic controls.</p>
+                </div>
+                <div class="feature-card p-8 border border-white/5 rounded-3xl">
+                    <div class="w-10 h-10 rounded-xl bg-violet/10 flex items-center justify-center mb-5">
+                        <svg class="w-5 h-5 text-violet" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linejoin="round" d="M12 3l1.5 4.5L18 9l-4.5 1.5L12 15l-1.5-4.5L6 9l4.5-1.5L12 3z"/><path stroke-linecap="round" d="M19 14l.7 2.1L22 17l-2.3.9L19 20l-.7-2.1L16 17l2.3-.9L19 14z"/></svg>
+                    </div>
+                    <h3 class="font-header font-semibold text-base mb-2">Ask ONIX AI</h3>
+                    <p class="text-xs text-muted leading-relaxed">An in-viewer copilot for image context, findings support, study-specific Q&amp;A, and report drafting.</p>
+                </div>
+                <div class="feature-card p-8 border border-white/5 rounded-3xl">
+                    <div class="w-10 h-10 rounded-xl bg-neon/10 flex items-center justify-center mb-5">
+                        <svg class="w-5 h-5 text-neon" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><rect x="9" y="2" width="6" height="12" rx="3"/><path stroke-linecap="round" d="M5 11a7 7 0 0014 0M12 18v3"/></svg>
+                    </div>
+                    <h3 class="font-header font-semibold text-base mb-2">Voice to Structured Report</h3>
+                    <p class="text-xs text-muted leading-relaxed">Dictate directly into the case workflow and convert speech into structured findings, impression, and recommendation sections.</p>
+                </div>
+                <div class="feature-card p-8 border border-white/5 rounded-3xl">
+                    <div class="w-10 h-10 rounded-xl bg-violet/10 flex items-center justify-center mb-5">
+                        <svg class="w-5 h-5 text-violet" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><circle cx="8" cy="8" r="3"/><circle cx="16" cy="16" r="3"/><path stroke-linecap="round" d="M10.5 9.5l3 5"/></svg>
+                    </div>
+                    <h3 class="font-header font-semibold text-base mb-2">Multi-Radiologist Case Rooms</h3>
+                    <p class="text-xs text-muted leading-relaxed">Second opinions, shared case discussion, in-case chat, and traceable collaboration without WhatsApp or email threads.</p>
+                </div>
+                <div class="feature-card p-8 border border-white/5 rounded-3xl">
+                    <div class="w-10 h-10 rounded-xl bg-neon/10 flex items-center justify-center mb-5">
+                        <svg class="w-5 h-5 text-neon" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><circle cx="5" cy="6" r="2"/><circle cx="5" cy="18" r="2"/><circle cx="19" cy="12" r="2"/><path stroke-linecap="round" d="M7 6h6a4 4 0 014 4M7 18h6a4 4 0 004-4"/></svg>
+                    </div>
+                    <h3 class="font-header font-semibold text-base mb-2">Smart Case Routing</h3>
+                    <p class="text-xs text-muted leading-relaxed">Assign studies by modality, body part, priority, subspecialty, and radiologist availability.</p>
+                </div>
+                <div class="feature-card p-8 border border-white/5 rounded-3xl">
+                    <div class="w-10 h-10 rounded-xl bg-violet/10 flex items-center justify-center mb-5">
+                        <svg class="w-5 h-5 text-violet" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linejoin="round" d="M12 3l7 3v5c0 4.5-3 7.5-7 9-4-1.5-7-4.5-7-9V6l7-3z"/><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4"/></svg>
+                    </div>
+                    <h3 class="font-header font-semibold text-base mb-2">Organization Admin Console</h3>
+                    <p class="text-xs text-muted leading-relaxed">Role-based access, case tracking, audit-friendly workflows, organization controls, and reporting visibility.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============== AI COPILOT SPOTLIGHT ============== -->
+        <section class="py-28 reveal">
+            <div class="grid md:grid-cols-2 gap-12 items-center">
+                <div>
+                    <div class="inline-block text-[10px] uppercase tracking-[0.3em] text-violet font-header font-bold mb-3">AI Copilot</div>
+                    <h2 class="text-3xl md:text-4xl font-header font-bold mb-5">Ask ONIX AI, Right Inside the Viewer</h2>
+                    <p class="text-sm text-muted font-light leading-relaxed mb-6">ONIX AI sits alongside every study, ready to help with image context, prior comparisons, findings support, and study-specific questions — drafting report language the radiologist can review, edit, and finalize.</p>
+                    <ul class="space-y-3 text-sm text-white/80">
+                        <li class="flex items-start gap-3"><span class="text-neon mt-1">＋</span> Contextual support for the study currently open</li>
+                        <li class="flex items-start gap-3"><span class="text-neon mt-1">＋</span> Findings drafted for radiologist review</li>
+                        <li class="flex items-start gap-3"><span class="text-neon mt-1">＋</span> Study-specific Q&amp;A without leaving the case</li>
+                        <li class="flex items-start gap-3"><span class="text-neon mt-1">＋</span> Faster path from read to signed report</li>
+                    </ul>
+                </div>
+                <div class="p-10 bg-white/5 border border-white/5 rounded-3xl">
+                    <div class="rounded-2xl border border-white/5 bg-[#070d1a] p-6 h-72 flex flex-col">
+                        <div class="flex items-center gap-2 mb-4">
+                            <span class="w-2 h-2 rounded-full bg-neon"></span>
+                            <span class="text-[10px] uppercase tracking-widest text-muted font-header">Ask ONIX AI</span>
+                        </div>
+                        <div class="space-y-3 text-xs">
+                            <div class="bg-white/5 rounded-xl px-4 py-3 max-w-[80%] text-white/80">Summarize key findings on this CT chest series.</div>
+                            <div class="bg-neon/10 border border-neon/20 rounded-xl px-4 py-3 max-w-[85%] ml-auto text-white/90">Draft impression ready for your review — no changes saved until you approve.</div>
+                        </div>
+                        <div class="mt-auto pt-4 border-t border-white/5 text-[10px] text-muted uppercase tracking-widest">AI assists. Radiologists decide.</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============== WORKFLOW ============== -->
+        <section class="py-28 reveal">
+            <div class="text-center mb-16">
+                <div class="inline-block text-[10px] uppercase tracking-[0.3em] text-neon font-header font-bold mb-3">The Workflow</div>
+                <h2 class="text-3xl md:text-4xl font-header font-bold">From Study Upload to Signed Report</h2>
+            </div>
+            <div class="grid md:grid-cols-4 gap-6">
+                <div class="p-6 border border-white/5 rounded-2xl">
+                    <div class="text-xs font-header text-violet font-bold mb-3">01</div>
+                    <h4 class="text-sm font-header font-semibold mb-2">Study Arrives</h4>
+                    <p class="text-xs text-muted leading-relaxed">Cases are routed automatically by modality, body part, and priority.</p>
+                </div>
+                <div class="p-6 border border-white/5 rounded-2xl">
+                    <div class="text-xs font-header text-violet font-bold mb-3">02</div>
+                    <h4 class="text-sm font-header font-semibold mb-2">AI Supports the Read</h4>
+                    <p class="text-xs text-muted leading-relaxed">ONIX AI surfaces context and prior studies, and drafts initial findings.</p>
+                </div>
+                <div class="p-6 border border-white/5 rounded-2xl">
+                    <div class="text-xs font-header text-violet font-bold mb-3">03</div>
+                    <h4 class="text-sm font-header font-semibold mb-2">Radiologist Reviews</h4>
+                    <p class="text-xs text-muted leading-relaxed">Findings, impression, and recommendations are reviewed and finalized.</p>
+                </div>
+                <div class="p-6 border border-white/5 rounded-2xl">
+                    <div class="text-xs font-header text-violet font-bold mb-3">04</div>
+                    <h4 class="text-sm font-header font-semibold mb-2">Report Delivered</h4>
+                    <p class="text-xs text-muted leading-relaxed">The signed structured report is delivered into the case workflow, fully tracked.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============== SOLUTIONS BY AUDIENCE ============== -->
+        <section id="solutions" class="py-28 reveal">
+            <div class="text-center mb-16">
+                <div class="inline-block text-[10px] uppercase tracking-[0.3em] text-neon font-header font-bold mb-3">Solutions</div>
+                <h2 class="text-3xl md:text-4xl font-header font-bold">Built for Every Radiology Team</h2>
+            </div>
+            <div class="grid md:grid-cols-2 gap-6">
+                <div class="p-8 border border-white/5 rounded-3xl bg-white/[0.02]">
+                    <h3 class="font-header font-semibold text-base mb-2 text-primary">For Hospitals</h3>
+                    <p class="text-xs text-muted leading-relaxed">Faster access to radiology reporting, subspecialty support, structured report workflows, and centralized case tracking.</p>
+                </div>
+                <div class="p-8 border border-white/5 rounded-3xl bg-white/[0.02]">
+                    <h3 class="font-header font-semibold text-base mb-2 text-primary">For Imaging Centers</h3>
+                    <p class="text-xs text-muted leading-relaxed">Reduce report delays, improve patient experience, and manage MRI, CT, X-ray, ultrasound, and other modality workflows.</p>
+                </div>
+                <div class="p-8 border border-white/5 rounded-3xl bg-white/[0.02]">
+                    <h3 class="font-header font-semibold text-base mb-2 text-primary">For Teleradiology Groups</h3>
+                    <p class="text-xs text-muted leading-relaxed">Coordinate distributed radiologists, case queues, second opinions, reporting quality, and admin controls from one platform.</p>
+                </div>
+                <div class="p-8 border border-white/5 rounded-3xl bg-white/[0.02]">
+                    <h3 class="font-header font-semibold text-base mb-2 text-primary">For Radiologists</h3>
+                    <p class="text-xs text-muted leading-relaxed">Read from anywhere using a browser-based viewer, in-case AI assistant, dictation, report editor, and collaboration tools.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============== CLINICAL TRUST BANNER ============== -->
+        <section class="py-16 reveal">
+            <div class="text-center p-12 border border-neon/10 bg-neon/5 rounded-3xl">
+                <h3 class="text-2xl md:text-3xl font-header font-light mb-3">AI assists. Radiologists decide.</h3>
+                <p class="text-sm text-muted max-w-xl mx-auto font-light leading-relaxed">ONIX AI supports the read. Final interpretation, approval, and sign-off remain with the radiologist.</p>
+            </div>
+        </section>
+
+        <!-- ============== FINAL CTA / ROI ============== -->
+        <section id="roi" class="py-28 text-center reveal">
+            <div class="inline-block text-[10px] uppercase tracking-[0.3em] text-violet font-header font-bold mb-3">Get Started</div>
+            <h2 class="text-3xl md:text-5xl font-header font-bold mb-5">Modernize Your Reading Room</h2>
+            <p class="text-sm text-muted max-w-xl mx-auto font-light leading-relaxed mb-10">Book a discovery call or request an ONIX AI demo — and see what a unified radiology workspace can do for your team's turnaround and throughput.</p>
+            <div class="flex gap-4 justify-center flex-wrap">
+                <a class="px-8 py-3 bg-neon/10 text-neon border border-neon/20 rounded-full font-header text-[11px] uppercase tracking-[0.1em] hover:bg-neon/20 transition cursor-pointer">Request ONIX Demo</a>
+                <a class="px-8 py-3 border border-white/20 rounded-full font-header text-[11px] uppercase tracking-[0.1em] hover:border-white/50 transition cursor-pointer">Calculate Workflow ROI</a>
+            </div>
+        </section>
+    </main>
+
+    <footer class="py-16 border-t border-white/5 text-center text-muted text-[11px] uppercase tracking-widest">
+        <p class="mb-2">ONIX AI is a product of GenPhase.ai</p>
+        <p>&copy; 2026 GenPhase.ai. All rights reserved.</p>
+    </footer>
+
+    <script>
+        // Intersection Observer for scroll pop animation
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+    </script>
+</body>
+</html>
